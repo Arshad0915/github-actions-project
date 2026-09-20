@@ -47,7 +47,8 @@ jobs:
 
       - name: install sonar qube scanner cli
         run: |
-          if [! -d "$HOME/sonar-scanner-cli"];then
+          if [ ! -d "$HOME/sonar-scanner-cli" ]; then
+
             echo "downloading sonarqube scanner cli..."
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.3.0.5189-linux-x64.zip -O /tmp/sonar-scanner.zip
             unzip /tmp/sonar-scanner.zip -d $HOME
