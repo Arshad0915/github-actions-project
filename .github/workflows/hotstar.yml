@@ -69,12 +69,6 @@ jobs:
             -Dsonar.host.url=$SONAR_HOST \
             -Dsonar.login=$SONAR_LOGIN
 
-
-
-
-
-
-
   deploy: 
    runs-on: [self-hosted,linux]
    needs: build
