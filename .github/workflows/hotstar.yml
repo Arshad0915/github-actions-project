@@ -27,6 +27,15 @@ jobs:
           fi
           mvn -version
 
+      - name: cache maven packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+            key:${{runner.os}}-maven-${{hashFiles('**/pom.xml')}}
+            restore-keys: |
+              ${{runner.os}}-maven-
+
       - name: build with maven
         run: mvn clean package -DskipTests
 
@@ -56,4 +65,6 @@ jobs:
            "http://${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}}@${{secrets.TOMCAT_HOST}}/manager/text/deploy?path=/myapp&update=true"
 
       
-      
+     - name: verify deployment
+       run: |
+        curl -l http://${{secrets.TOMCAT_HOST}}/myapp
