@@ -62,7 +62,7 @@ jobs:
          SONAR_HOST: ${{ secrets.SONAR_HOST }}
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -U org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.2.4237:sonar \
+          mvn -U org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar
           -Dsonar.projectKey=hotstar \
           -Dsonar.host.url="$SONAR_HOST" \
           -Dsonar.token="$SONAR_TOKEN"
