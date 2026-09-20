@@ -5,7 +5,7 @@ on:
     branches: [main]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted,linux]
 
     steps:
       - name: checkout code
@@ -16,6 +16,16 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
+      - name: ensure maven is installed
+        run: |
+          if ! command -v mvn &> /dev/null;then
+            echo "Maven not found.Installing..."
+            sudo dnf install -y maven
+          else
+            echo "maven is already installed"
+          fi
+          mvn -version
 
       - name: build with maven
         run: mvn clean package -DskipTests
@@ -28,7 +38,7 @@ jobs:
 
 
   deploy: 
-   runs-on: ubuntu-latest
+   runs-on: [self-hosted,linux]
    needs: build
    environment: production
 
